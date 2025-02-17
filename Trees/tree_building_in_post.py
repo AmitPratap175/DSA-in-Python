@@ -51,14 +51,15 @@ def build_tree(inorder_, postorder_,idx, left, right):
         return None
     # print(idx, left, right)
     
-    val = preorder_[idx]
+    val = postorder_[idx]
     idx -= 1
 
     root_tmp = Node(val)
     idx_in = search(inorder_, val, left, right)
 
-    root_tmp.left = build_tree(inorder_, preorder_, idx, left, idx_in-1)
-    root_tmp.right = build_tree(inorder_, preorder_, idx, idx_in +1, right)
+    root_tmp.right = build_tree(inorder_, postorder_, idx, idx_in +1, right)
+    root_tmp.left = build_tree(inorder_, postorder_, idx, left, idx_in-1)
+    
 
     return root_tmp
 
